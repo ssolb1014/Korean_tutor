@@ -856,7 +856,7 @@ function submitTest(){
     q18:getInputValue('q18'),
   };
 
-  if(SHEETS_URL!=='https://script.google.com/macros/s/AKfycbxocwZqT1qznSm936l5d-3KuP9x7-vqPhONlouMnOuWQqXXM1-pP9SxIEi9owaVgH0j/exec'){
+  if(SHEETS_URL){
     fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
     .then(()=>{const el=document.getElementById('submitStatus');el.className='submit-status success';el.textContent='Your answers have been saved successfully!';})
     .catch(()=>{const el=document.getElementById('submitStatus');el.className='submit-status error';el.textContent='Could not save to server. Please screenshot your results.';});
