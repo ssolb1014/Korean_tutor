@@ -329,7 +329,7 @@ textarea.writing-input{min-height:120px;resize:vertical;line-height:1.8}
 
 <script>
 const SECTIONS=5;let currentSection=0;
-const SHEETS_URL='YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+const SHEETS_URL='https://script.google.com/macros/s/AKfycbxocwZqT1qznSm936l5d-3KuP9x7-vqPhONlouMnOuWQqXXM1-pP9SxIEi9owaVgH0j/exec';
 const TEST_LEVEL='Beginner 2';
 const ANSWERS={q1:'b',q2:'a',q3:'b',q4:'c',q5:'passport',q6:'airplane',q7:'hotel',q8:'b',q9:'b',q10:'a',q11:'b',q12:'c',q13:'d',q14:'b',q15:'b'};
 const WRITING_ANSWERS={q16a:['여행'],q16b:['경험'],q16c:['계획'],q17a:['봤어요'],q17b:['만날 거예요','만날거예요'],q17c:['공부했어요']};
@@ -370,7 +370,7 @@ function submitTest(){
   document.getElementById('scoreWriting').textContent=s.writingScore+' / 20';
   showSection(4);
   const data={timestamp:new Date().toISOString(),testLevel:TEST_LEVEL,name:document.getElementById('studentName').value.trim(),email:document.getElementById('studentEmail').value.trim(),country:document.getElementById('studentCountry').value.trim(),vocabScore:s.vocabScore,readingScore:s.readingScore,writingScore:s.writingScore,totalScore:s.total,recommendedLevel:l.level,q1:getRadioValue('q1'),q2:getRadioValue('q2'),q3:getRadioValue('q3'),q4:getRadioValue('q4'),q5:getSelectValue('q5'),q6:getSelectValue('q6'),q7:getSelectValue('q7'),q8:getRadioValue('q8'),q9:getRadioValue('q9'),q10:getRadioValue('q10'),q11:getRadioValue('q11'),q12:getRadioValue('q12'),q13:getRadioValue('q13'),q14:getRadioValue('q14'),q15:getRadioValue('q15'),q16a:getInputValue('q16a'),q16b:getInputValue('q16b'),q16c:getInputValue('q16c'),q17a:getInputValue('q17a'),q17b:getInputValue('q17b'),q17c:getInputValue('q17c'),q18:getInputValue('q18')};
-  if(SHEETS_URL!=='YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'){fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(()=>{const e=document.getElementById('submitStatus');e.className='submit-status success';e.textContent='Your answers have been saved successfully!';}).catch(()=>{const e=document.getElementById('submitStatus');e.className='submit-status error';e.textContent='Could not save to server. Please screenshot your results.';});}
+  if(SHEETS_URL!=='https://script.google.com/macros/s/AKfycbxocwZqT1qznSm936l5d-3KuP9x7-vqPhONlouMnOuWQqXXM1-pP9SxIEi9owaVgH0j/exec'){fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(()=>{const e=document.getElementById('submitStatus');e.className='submit-status success';e.textContent='Your answers have been saved successfully!';}).catch(()=>{const e=document.getElementById('submitStatus');e.className='submit-status error';e.textContent='Could not save to server. Please screenshot your results.';});}
 }
 updateProgress();
 </script>
