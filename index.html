@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Korean Level Test | 한국어 레벨 테스트</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #1A1A1A;
+  --dark: #333333;
+  --gray: #999999;
+  --light: #E8E8E8;
+  --lighter: #F4F4F4;
+  --white: #FFFFFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans KR', 'Inter', sans-serif;
+  background: var(--lighter);
+  color: var(--dark);
+  line-height: 1.7;
+}
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px 16px 60px;
+}
+
+.header {
+  background: var(--black);
+  border-radius: 16px;
+  padding: 48px 32px;
+  text-align: center;
+  margin-bottom: 32px;
+  color: var(--white);
+}
+.header .brand { font-size: 13px; letter-spacing: 3px; opacity: 0.5; margin-bottom: 8px; text-transform: uppercase; }
+.header h1 { font-size: 28px; font-weight: 700; margin-bottom: 6px; }
+.header .subtitle { font-size: 15px; opacity: 0.7; }
+
+.instruction {
+  text-align: center;
+  font-size: 15px;
+  color: var(--gray);
+  margin-bottom: 32px;
+}
+
+.level-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.level-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 28px 24px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.level-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.level-card .level-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 4px;
+}
+.level-card .topik {
+  display: inline-block;
+  background: var(--black);
+  color: var(--white);
+  padding: 2px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  align-self: flex-start;
+}
+.level-card .desc {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.6;
+  flex: 1;
+  margin-bottom: 16px;
+}
+.level-card .start-btn {
+  display: inline-block;
+  text-decoration: none;
+  background: var(--black);
+  color: var(--white);
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  text-align: center;
+  transition: background 0.2s;
+}
+.level-card .start-btn:hover {
+  background: var(--dark);
+}
+
+.suggestion {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 28px 24px;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  margin-bottom: 40px;
+}
+.suggestion h3 {
+  font-size: 16px;
+  color: var(--black);
+  margin-bottom: 8px;
+}
+.suggestion p {
+  font-size: 14px;
+  color: var(--gray);
+  margin-bottom: 16px;
+}
+.suggestion a {
+  display: inline-block;
+  text-decoration: none;
+  border: 2px solid var(--black);
+  color: var(--black);
+  padding: 10px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+.suggestion a:hover {
+  background: var(--black);
+  color: var(--white);
+}
+
+.footer {
+  text-align: center;
+  font-size: 13px;
+  color: var(--gray);
+  padding-top: 20px;
+  border-top: 1px solid var(--light);
+}
+
+@media (max-width: 580px) {
+  .level-grid { grid-template-columns: 1fr; }
+  .header { padding: 32px 20px; }
+  .header h1 { font-size: 22px; }
+  .container { padding: 12px 12px 40px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <div class="brand">Korean Language</div>
+    <h1>Korean Level Test</h1>
+    <div class="subtitle">한국어 레벨 테스트</div>
+  </div>
+
+  <p class="instruction">Select your estimated level to begin the placement test.</p>
+
+  <div class="level-grid">
+    <div class="level-card">
+      <div class="level-name">Starter</div>
+      <span class="topik">Pre-A1</span>
+      <p class="desc">For absolute beginners. Hangul basics, greetings, numbers, and simple self-introductions.</p>
+      <a href="starter.html" class="start-btn">Start Test &rarr;</a>
+    </div>
+
+    <div class="level-card">
+      <div class="level-name">Beginner 1</div>
+      <span class="topik">A1 &middot; TOPIK I</span>
+      <p class="desc">Daily life vocabulary, basic particles, simple sentences about food, weather, and routines.</p>
+      <a href="beginner1.html" class="start-btn">Start Test &rarr;</a>
+    </div>
+
+    <div class="level-card">
+      <div class="level-name">Beginner 2</div>
+      <span class="topik">A2 &middot; TOPIK I</span>
+      <p class="desc">Past and future tenses, travel vocabulary, making plans, and reading simple emails and messages.</p>
+      <a href="beginner2.html" class="start-btn">Start Test &rarr;</a>
+    </div>
+
+    <div class="level-card">
+      <div class="level-name">Intermediate 1</div>
+      <span class="topik">B1 &middot; TOPIK II</span>
+      <p class="desc">Social topics, formal language, expressing opinions, conditional and causal grammar patterns.</p>
+      <a href="intermediate1.html" class="start-btn">Start Test &rarr;</a>
+    </div>
+
+    <div class="level-card">
+      <div class="level-name">Intermediate 2</div>
+      <span class="topik">B2 &middot; TOPIK II</span>
+      <p class="desc">News and formal writing, advanced grammar connectors, summarizing, and expressing nuanced opinions.</p>
+      <a href="intermediate2.html" class="start-btn">Start Test &rarr;</a>
+    </div>
+
+    <div class="level-card">
+      <div class="level-name">Advanced</div>
+      <span class="topik">C1 &middot; TOPIK II</span>
+      <p class="desc">Academic Korean, abstract vocabulary, formal essays, critical analysis, and persuasive writing.</p>
+      <a href="advanced.html" class="start-btn">Start Test &rarr;</a>
+    </div>
+  </div>
+
+  <div class="suggestion">
+    <h3>Not sure which level?</h3>
+    <p>If you're unsure about your level, start with the Starter test. Your results will suggest the right level for you.</p>
+    <a href="starter.html">Start with Starter &rarr;</a>
+  </div>
+
+  <div class="footer">
+    &copy; 2026 @your_handle &middot; Korean Level Test
+  </div>
+</div>
+
+</body>
+</html>

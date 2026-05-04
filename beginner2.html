@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Korean Level Test - Beginner 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#1A1A1A;--dark:#333;--gray:#999;--light:#E8E8E8;--lighter:#F4F4F4;--white:#FFF}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans KR','Inter',sans-serif;background:var(--lighter);color:var(--dark);line-height:1.7}
+.container{max-width:680px;margin:0 auto;padding:20px 16px 40px}
+.back-link{display:inline-block;font-size:14px;color:var(--gray);text-decoration:none;margin-bottom:16px;transition:color .2s}.back-link:hover{color:var(--black)}
+.header{background:var(--black);border-radius:16px;padding:40px 32px;text-align:center;margin-bottom:24px;color:var(--white)}
+.header .brand{font-size:13px;letter-spacing:2px;opacity:.5;margin-bottom:8px}.header h1{font-size:28px;font-weight:700;margin-bottom:6px}.header .subtitle{font-size:15px;opacity:.7}
+.header .level-badge{display:inline-block;background:var(--white);color:var(--black);padding:4px 18px;border-radius:20px;font-size:13px;font-weight:700;margin-top:12px}
+.progress-wrap{background:var(--white);border-radius:12px;padding:16px 20px;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.progress-label{font-size:13px;color:var(--gray);margin-bottom:8px;display:flex;justify-content:space-between}
+.progress-bar{width:100%;height:8px;background:var(--light);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:var(--black);border-radius:4px;transition:width .4s ease;width:0%}
+.section{display:none;animation:fadeIn .3s ease}.section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.section-card{background:var(--white);border-radius:14px;padding:28px 24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.section-title{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.section-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;color:white;flex-shrink:0}
+.section-title h2{font-size:18px;font-weight:700;color:var(--black)}.section-title .count{font-size:13px;color:var(--gray);font-weight:400}
+.form-group{margin-bottom:18px}.form-group label{display:block;font-size:14px;font-weight:600;color:var(--black);margin-bottom:6px}
+.form-group input{width:100%;padding:12px 16px;border:2px solid var(--light);border-radius:10px;font-size:15px;font-family:inherit;transition:border-color .2s}.form-group input:focus{outline:none;border-color:var(--dark)}
+.question{margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--lighter)}.question:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.q-number{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--black);color:white;border-radius:50%;font-size:13px;font-weight:700;margin-right:10px;flex-shrink:0}
+.q-text{font-size:15px;font-weight:600;color:var(--dark);margin-bottom:14px;display:flex;align-items:flex-start}.q-text span{line-height:28px}
+.q-hint{font-size:13px;color:var(--gray);margin-bottom:12px;padding-left:38px}
+.options{display:flex;flex-direction:column;gap:8px;padding-left:38px}
+.option-label{display:flex;align-items:center;padding:12px 16px;border:2px solid var(--light);border-radius:10px;cursor:pointer;transition:all .2s;font-size:15px}
+.option-label:hover{border-color:var(--dark);background:var(--lighter)}.option-label input[type="radio"]{display:none}
+.option-label .radio-dot{width:20px;height:20px;border:2px solid #CCC;border-radius:50%;margin-right:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.option-label input[type="radio"]:checked+.radio-dot{border-color:var(--black);background:var(--black)}
+.option-label input[type="radio"]:checked+.radio-dot::after{content:'';width:8px;height:8px;background:white;border-radius:50%}
+.option-label input[type="radio"]:checked~.option-text{color:var(--black);font-weight:600}
+.match-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:10px 16px;align-items:center;padding-left:38px}
+.match-kr{background:var(--lighter);padding:10px 16px;border-radius:8px;font-size:16px;font-weight:600;text-align:center;border:1px solid var(--light)}
+.match-arrow{color:var(--gray);font-size:18px}
+.match-select{padding:10px 12px;border:2px solid var(--light);border-radius:8px;font-size:14px;font-family:inherit;background:white;cursor:pointer}.match-select:focus{outline:none;border-color:var(--dark)}
+.writing-input{width:100%;padding:14px 16px;border:2px solid var(--light);border-radius:10px;font-size:16px;font-family:inherit;margin-left:38px;width:calc(100% - 38px)}.writing-input:focus{outline:none;border-color:var(--dark)}
+textarea.writing-input{min-height:120px;resize:vertical;line-height:1.8}
+.reading-passage{background:var(--lighter);border-radius:12px;padding:20px 24px;margin-bottom:20px;font-size:16px;line-height:2;border-left:4px solid var(--black)}
+.reading-passage .passage-label{font-size:12px;color:var(--dark);font-weight:700;margin-bottom:10px;letter-spacing:1px}
+.btn-row{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.btn{padding:14px 28px;border:none;border-radius:12px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;transition:all .2s}
+.btn-primary{background:var(--black);color:white;flex:1}.btn-primary:hover{background:var(--dark);transform:translateY(-1px)}
+.btn-secondary{background:var(--light);color:var(--dark)}.btn-secondary:hover{background:#D8D8D8}.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.result-card{background:var(--white);border-radius:16px;padding:40px 32px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.result-score{font-size:64px;font-weight:700;color:var(--black)}.result-total{font-size:20px;color:var(--gray);margin-bottom:20px}
+.result-level{display:inline-block;background:var(--black);color:white;padding:8px 24px;border-radius:24px;font-size:16px;font-weight:700;margin-bottom:16px}
+.result-breakdown{text-align:left;margin-top:24px;padding-top:24px;border-top:1px solid var(--lighter)}
+.result-row{display:flex;justify-content:space-between;padding:10px 0;font-size:15px}.result-row .label{color:var(--dark)}.result-row .score{font-weight:700;color:var(--black)}
+.submit-status{margin-top:16px;padding:12px;border-radius:8px;font-size:14px;text-align:center}.submit-status.success,.submit-status.error{background:var(--lighter);color:var(--dark)}
+.thank-you{margin-top:24px;font-size:14px;color:var(--gray);line-height:1.8}
+.inline-input{width:80px;padding:4px 8px;border:2px solid var(--light);border-radius:6px;font-size:15px;font-family:inherit}.inline-input:focus{outline:none;border-color:var(--dark)}
+@media(max-width:480px){.container{padding:12px 12px 32px}.header{padding:28px 20px}.header h1{font-size:22px}.section-card{padding:20px 16px}.match-grid{grid-template-columns:1fr;gap:8px}.match-arrow{display:none}}
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="index.html" class="back-link">&larr; Back to Level Selection</a>
+  <div class="header">
+    <div class="brand">KOREAN LANGUAGE</div>
+    <h1>Level Test</h1>
+    <div class="subtitle">한국어 레벨 테스트</div>
+    <div class="level-badge">BEGINNER 2 &middot; A2</div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-label"><span id="progressText">Info</span><span id="progressPercent">0%</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <!-- SECTION 0: Info -->
+  <div class="section active" id="section-0">
+    <div class="section-card">
+      <div class="section-title"><div class="section-icon" style="background:var(--dark);">i</div><h2>Your Information</h2></div>
+      <div class="form-group"><label>Name / 이름</label><input type="text" id="studentName" placeholder="Enter your name"></div>
+      <div class="form-group"><label>Email / 이메일</label><input type="email" id="studentEmail" placeholder="Enter your email"></div>
+      <div class="form-group"><label>Country / 나라</label><input type="text" id="studentCountry" placeholder="Where are you from?"></div>
+      <div class="btn-row"><button class="btn btn-primary" onclick="nextSection()">Start Test</button></div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: Vocabulary -->
+  <div class="section" id="section-1">
+    <div class="section-card">
+      <div class="section-title"><div class="section-icon" style="background:var(--black);">A</div><div><h2>Vocabulary <span class="count">어휘</span></h2></div></div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">1</span><span>What does "예약" mean?</span></div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q1" value="a"><span class="radio-dot"></span><span class="option-text">Promise</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="b"><span class="radio-dot"></span><span class="option-text">Reservation</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="c"><span class="radio-dot"></span><span class="option-text">Schedule</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="d"><span class="radio-dot"></span><span class="option-text">Meeting</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">2</span><span>What does "감기" mean?</span></div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q2" value="a"><span class="radio-dot"></span><span class="option-text">Cold (illness)</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="b"><span class="radio-dot"></span><span class="option-text">Headache</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="c"><span class="radio-dot"></span><span class="option-text">Fever</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="d"><span class="radio-dot"></span><span class="option-text">Medicine</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">3</span><span>What does "취미" mean?</span></div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q3" value="a"><span class="radio-dot"></span><span class="option-text">Work</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="b"><span class="radio-dot"></span><span class="option-text">Hobby</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="c"><span class="radio-dot"></span><span class="option-text">Dream</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="d"><span class="radio-dot"></span><span class="option-text">Talent</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">4</span><span>What does "공항" mean?</span></div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q4" value="a"><span class="radio-dot"></span><span class="option-text">Train station</span></label>
+          <label class="option-label"><input type="radio" name="q4" value="b"><span class="radio-dot"></span><span class="option-text">Bus stop</span></label>
+          <label class="option-label"><input type="radio" name="q4" value="c"><span class="radio-dot"></span><span class="option-text">Airport</span></label>
+          <label class="option-label"><input type="radio" name="q4" value="d"><span class="radio-dot"></span><span class="option-text">Harbor</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">5</span><span>Match the Korean words with their English meanings.</span></div>
+        <div class="match-grid">
+          <div class="match-kr">여권</div><div class="match-arrow">=</div>
+          <select class="match-select" name="q5"><option value="">Select...</option><option value="passport">Passport</option><option value="airplane">Airplane</option><option value="hotel">Hotel</option></select>
+          <div class="match-kr">비행기</div><div class="match-arrow">=</div>
+          <select class="match-select" name="q6"><option value="">Select...</option><option value="passport">Passport</option><option value="airplane">Airplane</option><option value="hotel">Hotel</option></select>
+          <div class="match-kr">호텔</div><div class="match-arrow">=</div>
+          <select class="match-select" name="q7"><option value="">Select...</option><option value="passport">Passport</option><option value="airplane">Airplane</option><option value="hotel">Hotel</option></select>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">8</span><span>친구___ 만났어요. (I met a friend.)</span></div>
+        <div class="q-hint">Choose the correct particle.</div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q8" value="a"><span class="radio-dot"></span><span class="option-text">을</span></label>
+          <label class="option-label"><input type="radio" name="q8" value="b"><span class="radio-dot"></span><span class="option-text">를</span></label>
+          <label class="option-label"><input type="radio" name="q8" value="c"><span class="radio-dot"></span><span class="option-text">에</span></label>
+          <label class="option-label"><input type="radio" name="q8" value="d"><span class="radio-dot"></span><span class="option-text">는</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">9</span><span>부산___ 갔어요. (I went to Busan.)</span></div>
+        <div class="q-hint">Choose the correct particle.</div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q9" value="a"><span class="radio-dot"></span><span class="option-text">을</span></label>
+          <label class="option-label"><input type="radio" name="q9" value="b"><span class="radio-dot"></span><span class="option-text">에</span></label>
+          <label class="option-label"><input type="radio" name="q9" value="c"><span class="radio-dot"></span><span class="option-text">는</span></label>
+          <label class="option-label"><input type="radio" name="q9" value="d"><span class="radio-dot"></span><span class="option-text">이</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">10</span><span>Which sentence means "I went to the hospital because I was sick"?</span></div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q10" value="a"><span class="radio-dot"></span><span class="option-text">아파서 병원에 갔어요.</span></label>
+          <label class="option-label"><input type="radio" name="q10" value="b"><span class="radio-dot"></span><span class="option-text">아파면 병원에 가요.</span></label>
+          <label class="option-label"><input type="radio" name="q10" value="c"><span class="radio-dot"></span><span class="option-text">아프고 병원에 갔어요.</span></label>
+          <label class="option-label"><input type="radio" name="q10" value="d"><span class="radio-dot"></span><span class="option-text">아픈데 병원에 가요.</span></label>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="prevSection()">Back</button>
+        <button class="btn btn-primary" onclick="nextSection()">Next: Reading</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: Reading -->
+  <div class="section" id="section-2">
+    <div class="section-card">
+      <div class="section-title"><div class="section-icon" style="background:var(--dark);">R</div><div><h2>Reading <span class="count">읽기</span></h2></div></div>
+
+      <div class="reading-passage">
+        <div class="passage-label">EMAIL</div>
+        제목: 생일 파티 초대<br><br>
+        안녕하세요, 여러분!<br>
+        다음 주 토요일에 제 생일 파티가 있어요.<br>
+        장소는 유미 집이에요.<br>
+        저녁 6시에 시작해요.<br>
+        맛있는 음식이 많이 있을 거예요!<br>
+        꼭 오세요~
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">11</span><span>What is this email about?</span></div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q11" value="a"><span class="radio-dot"></span><span class="option-text">A wedding</span></label>
+          <label class="option-label"><input type="radio" name="q11" value="b"><span class="radio-dot"></span><span class="option-text">A birthday party</span></label>
+          <label class="option-label"><input type="radio" name="q11" value="c"><span class="radio-dot"></span><span class="option-text">A graduation</span></label>
+          <label class="option-label"><input type="radio" name="q11" value="d"><span class="radio-dot"></span><span class="option-text">A company dinner</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">12</span><span>When is the event?</span></div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q12" value="a"><span class="radio-dot"></span><span class="option-text">This Friday</span></label>
+          <label class="option-label"><input type="radio" name="q12" value="b"><span class="radio-dot"></span><span class="option-text">This Saturday</span></label>
+          <label class="option-label"><input type="radio" name="q12" value="c"><span class="radio-dot"></span><span class="option-text">Next Saturday</span></label>
+          <label class="option-label"><input type="radio" name="q12" value="d"><span class="radio-dot"></span><span class="option-text">Next Sunday</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">13</span><span>Where will it take place?</span></div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q13" value="a"><span class="radio-dot"></span><span class="option-text">A restaurant</span></label>
+          <label class="option-label"><input type="radio" name="q13" value="b"><span class="radio-dot"></span><span class="option-text">A hotel</span></label>
+          <label class="option-label"><input type="radio" name="q13" value="c"><span class="radio-dot"></span><span class="option-text">A cafe</span></label>
+          <label class="option-label"><input type="radio" name="q13" value="d"><span class="radio-dot"></span><span class="option-text">Yumi's house</span></label>
+        </div>
+      </div>
+
+      <div class="reading-passage" style="margin-top:28px;">
+        <div class="passage-label">BLOG POST</div>
+        제주도 여행 후기<br><br>
+        지난 주말에 제주도에 다녀왔어요.<br>
+        바다가 정말 예뻤어요! 해산물도 맛있었어요.<br>
+        날씨가 좋아서 한라산도 올라갔어요.<br>
+        너무 좋았어요. 꼭 다시 가고 싶어요!
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">14</span><span>How does the writer feel about Jeju?</span></div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q14" value="a"><span class="radio-dot"></span><span class="option-text">It was disappointing</span></label>
+          <label class="option-label"><input type="radio" name="q14" value="b"><span class="radio-dot"></span><span class="option-text">Wants to go again</span></label>
+          <label class="option-label"><input type="radio" name="q14" value="c"><span class="radio-dot"></span><span class="option-text">It was too expensive</span></label>
+          <label class="option-label"><input type="radio" name="q14" value="d"><span class="radio-dot"></span><span class="option-text">The weather was bad</span></label>
+        </div>
+      </div>
+
+      <div class="reading-passage" style="margin-top:28px;">
+        <div class="passage-label">KAKAOTALK CHAT</div>
+        수진: 오늘 영화 볼래?<br>
+        민호: 좋아! 몇 시에?<br>
+        수진: 3시 영화 어때?<br>
+        민호: 좋아. 극장 앞에서 만나자!
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">15</span><span>What time is the movie?</span></div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q15" value="a"><span class="radio-dot"></span><span class="option-text">2 o'clock</span></label>
+          <label class="option-label"><input type="radio" name="q15" value="b"><span class="radio-dot"></span><span class="option-text">3 o'clock</span></label>
+          <label class="option-label"><input type="radio" name="q15" value="c"><span class="radio-dot"></span><span class="option-text">4 o'clock</span></label>
+          <label class="option-label"><input type="radio" name="q15" value="d"><span class="radio-dot"></span><span class="option-text">5 o'clock</span></label>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="prevSection()">Back</button>
+        <button class="btn btn-primary" onclick="nextSection()">Next: Writing</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: Writing -->
+  <div class="section" id="section-3">
+    <div class="section-card">
+      <div class="section-title"><div class="section-icon" style="background:var(--dark);">W</div><div><h2>Writing <span class="count">쓰기</span></h2></div></div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">16</span><span>Write the following words in Korean (Hangul).</span></div>
+        <div style="padding-left:38px;display:flex;flex-direction:column;gap:12px;">
+          <div><div style="font-size:14px;color:var(--gray);margin-bottom:4px;">a) "yeohaeng" (travel)</div><input type="text" class="writing-input" name="q16a" placeholder="Write in Hangul..." style="margin-left:0;width:100%;"></div>
+          <div><div style="font-size:14px;color:var(--gray);margin-bottom:4px;">b) "gyeongheom" (experience)</div><input type="text" class="writing-input" name="q16b" placeholder="Write in Hangul..." style="margin-left:0;width:100%;"></div>
+          <div><div style="font-size:14px;color:var(--gray);margin-bottom:4px;">c) "gyehoek" (plan)</div><input type="text" class="writing-input" name="q16c" placeholder="Write in Hangul..." style="margin-left:0;width:100%;"></div>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">17</span><span>Change the sentences to past or future tense as indicated.</span></div>
+        <div class="q-hint">Write the correct form.</div>
+        <div style="padding-left:38px;background:var(--lighter);padding:20px;border-radius:10px;line-height:2.4;font-size:16px;">
+          a) 저는 어제 영화를 <input type="text" name="q17a" class="inline-input" style="width:100px;" placeholder="___">. (보다 &rarr; past)<br>
+          b) 내일 친구를 <input type="text" name="q17b" class="inline-input" style="width:100px;" placeholder="___">. (만나다 &rarr; future)<br>
+          c) 지난 주에 한국어를 <input type="text" name="q17c" class="inline-input" style="width:100px;" placeholder="___">. (공부하다 &rarr; past)
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">18</span><span>Write about a trip you took or want to take. (4~5 sentences)</span></div>
+        <div class="q-hint">Include: where, when, what you did/will do, how you felt/feel.</div>
+        <textarea class="writing-input" name="q18" placeholder="Write about your trip in Korean...&#10;&#10;Example: 저는 작년에 일본에 갔어요. ..."></textarea>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="prevSection()">Back</button>
+        <button class="btn btn-primary" onclick="submitTest()">Submit Test</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: Results -->
+  <div class="section" id="section-4">
+    <div class="result-card">
+      <div style="font-size:14px;color:var(--gray);margin-bottom:8px;">YOUR SCORE</div>
+      <div class="result-score" id="resultScore">0</div>
+      <div class="result-total">/ 60</div>
+      <div class="result-level" id="resultLevel">Beginner 2</div>
+      <p id="resultMessage" style="font-size:15px;color:var(--dark);margin-top:12px;line-height:1.8;"></p>
+      <div class="result-breakdown">
+        <div class="result-row"><span class="label">Vocabulary (어휘)</span><span class="score" id="scoreVocab">0 / 20</span></div>
+        <div class="result-row"><span class="label">Reading (읽기)</span><span class="score" id="scoreReading">0 / 20</span></div>
+        <div class="result-row"><span class="label">Writing (쓰기)</span><span class="score" id="scoreWriting">0 / 20</span></div>
+      </div>
+      <div id="submitStatus"></div>
+      <div class="thank-you">Thank you for completing the level test!<br>Your tutor will review your results and contact you soon.<br><br><a href="index.html" style="color:var(--dark);font-weight:600;">&larr; Back to Level Selection</a></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SECTIONS=5;let currentSection=0;
+const SHEETS_URL='YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+const TEST_LEVEL='Beginner 2';
+const ANSWERS={q1:'b',q2:'a',q3:'b',q4:'c',q5:'passport',q6:'airplane',q7:'hotel',q8:'b',q9:'b',q10:'a',q11:'b',q12:'c',q13:'d',q14:'b',q15:'b'};
+const WRITING_ANSWERS={q16a:['여행'],q16b:['경험'],q16c:['계획'],q17a:['봤어요'],q17b:['만날 거예요','만날거예요'],q17c:['공부했어요']};
+
+function updateProgress(){const p=Math.round((currentSection/(SECTIONS-1))*100);document.getElementById('progressFill').style.width=p+'%';document.getElementById('progressPercent').textContent=p+'%';document.getElementById('progressText').textContent=['Info','Vocabulary','Reading','Writing','Complete'][currentSection];}
+function showSection(i){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById('section-'+i).classList.add('active');currentSection=i;updateProgress();window.scrollTo({top:0,behavior:'smooth'});}
+function nextSection(){if(currentSection===0){if(!document.getElementById('studentName').value.trim()||!document.getElementById('studentEmail').value.trim()){alert('Please enter your name and email.');return;}}if(currentSection<SECTIONS-1)showSection(currentSection+1);}
+function prevSection(){if(currentSection>0)showSection(currentSection-1);}
+function getRadioValue(n){const e=document.querySelector(`input[name="${n}"]:checked`);return e?e.value:'';}
+function getSelectValue(n){const e=document.querySelector(`select[name="${n}"]`);return e?e.value:'';}
+function getInputValue(n){const e=document.querySelector(`input[name="${n}"],textarea[name="${n}"]`);return e?e.value.trim():'';}
+
+function gradeTest(){
+  let v=0,r=0,w=0;
+  for(let i=1;i<=4;i++)if(getRadioValue('q'+i)===ANSWERS['q'+i])v+=2;
+  for(let i=5;i<=7;i++)if(getSelectValue('q'+i)===ANSWERS['q'+i])v+=2;
+  for(let i=8;i<=10;i++)if(getRadioValue('q'+i)===ANSWERS['q'+i])v+=2;
+  for(let i=11;i<=15;i++)if(getRadioValue('q'+i)===ANSWERS['q'+i])r+=4;
+  let w16=0;['q16a','q16b','q16c'].forEach(k=>{const a=getInputValue(k).replace(/\s/g,'');if(WRITING_ANSWERS[k]&&WRITING_ANSWERS[k].some(x=>x===a))w16+=2;});w+=Math.min(w16,5);
+  let w17=0;['q17a','q17b','q17c'].forEach(k=>{const a=getInputValue(k).replace(/\s/g,'');if(WRITING_ANSWERS[k]&&WRITING_ANSWERS[k].some(x=>x===a))w17+=2;});w+=Math.min(w17,5);
+  const free=getInputValue('q18');if(free.length>0)w+=Math.min(free.length>30?5:2,10);
+  return{vocabScore:v,readingScore:r,writingScore:w,total:v+r+w};
+}
+
+function getLevel(t){
+  if(t<=30)return{level:'Beginner 2',message:'You are at the Beginner 2 level. We will work on past/future tenses, travel vocabulary, and reading emails.'};
+  if(t<=50)return{level:'Intermediate 1',message:'You are ready for Intermediate 1! We will focus on social topics, formal language, and expressing opinions.'};
+  return{level:'Intermediate 2+',message:'Excellent! Consider taking the Intermediate 2 test for a more accurate placement.'};
+}
+
+function submitTest(){
+  const s=gradeTest();const l=getLevel(s.total);
+  document.getElementById('resultScore').textContent=s.total;
+  document.getElementById('resultLevel').textContent='Recommended: '+l.level;
+  document.getElementById('resultMessage').textContent=l.message;
+  document.getElementById('scoreVocab').textContent=s.vocabScore+' / 20';
+  document.getElementById('scoreReading').textContent=s.readingScore+' / 20';
+  document.getElementById('scoreWriting').textContent=s.writingScore+' / 20';
+  showSection(4);
+  const data={timestamp:new Date().toISOString(),testLevel:TEST_LEVEL,name:document.getElementById('studentName').value.trim(),email:document.getElementById('studentEmail').value.trim(),country:document.getElementById('studentCountry').value.trim(),vocabScore:s.vocabScore,readingScore:s.readingScore,writingScore:s.writingScore,totalScore:s.total,recommendedLevel:l.level,q1:getRadioValue('q1'),q2:getRadioValue('q2'),q3:getRadioValue('q3'),q4:getRadioValue('q4'),q5:getSelectValue('q5'),q6:getSelectValue('q6'),q7:getSelectValue('q7'),q8:getRadioValue('q8'),q9:getRadioValue('q9'),q10:getRadioValue('q10'),q11:getRadioValue('q11'),q12:getRadioValue('q12'),q13:getRadioValue('q13'),q14:getRadioValue('q14'),q15:getRadioValue('q15'),q16a:getInputValue('q16a'),q16b:getInputValue('q16b'),q16c:getInputValue('q16c'),q17a:getInputValue('q17a'),q17b:getInputValue('q17b'),q17c:getInputValue('q17c'),q18:getInputValue('q18')};
+  if(SHEETS_URL!=='YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'){fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(()=>{const e=document.getElementById('submitStatus');e.className='submit-status success';e.textContent='Your answers have been saved successfully!';}).catch(()=>{const e=document.getElementById('submitStatus');e.className='submit-status error';e.textContent='Could not save to server. Please screenshot your results.';});}
+}
+updateProgress();
+</script>
+</body>
+</html>

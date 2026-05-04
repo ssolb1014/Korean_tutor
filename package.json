@@ -1,0 +1,9 @@
+{
+  "name": "korean-level-test",
+  "version": "1.0.0",
+  "description": "Korean Language Level Test for placement",
+  "scripts": {
+    "start": "npx serve .",
+    "build": "echo 'Static site, no build needed'"
+  }
+}

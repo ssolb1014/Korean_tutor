@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Korean Level Test - Advanced</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#1A1A1A;--dark:#333;--gray:#999;--light:#E8E8E8;--lighter:#F4F4F4;--white:#FFF}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans KR','Inter',sans-serif;background:var(--lighter);color:var(--dark);line-height:1.7}
+.container{max-width:680px;margin:0 auto;padding:20px 16px 40px}
+.back-link{display:inline-block;font-size:14px;color:var(--gray);text-decoration:none;margin-bottom:16px;transition:color .2s}.back-link:hover{color:var(--black)}
+.header{background:var(--black);border-radius:16px;padding:40px 32px;text-align:center;margin-bottom:24px;color:var(--white)}
+.header .brand{font-size:13px;letter-spacing:2px;opacity:.5;margin-bottom:8px}.header h1{font-size:28px;font-weight:700;margin-bottom:6px}.header .subtitle{font-size:15px;opacity:.7}
+.header .level-badge{display:inline-block;background:var(--white);color:var(--black);padding:4px 18px;border-radius:20px;font-size:13px;font-weight:700;margin-top:12px}
+.progress-wrap{background:var(--white);border-radius:12px;padding:16px 20px;margin-bottom:24px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.progress-label{font-size:13px;color:var(--gray);margin-bottom:8px;display:flex;justify-content:space-between}
+.progress-bar{width:100%;height:8px;background:var(--light);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:var(--black);border-radius:4px;transition:width .4s ease;width:0%}
+.section{display:none;animation:fadeIn .3s ease}.section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.section-card{background:var(--white);border-radius:14px;padding:28px 24px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.section-title{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.section-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;color:white;flex-shrink:0}
+.section-title h2{font-size:18px;font-weight:700;color:var(--black)}.section-title .count{font-size:13px;color:var(--gray);font-weight:400}
+.form-group{margin-bottom:18px}.form-group label{display:block;font-size:14px;font-weight:600;color:var(--black);margin-bottom:6px}
+.form-group input{width:100%;padding:12px 16px;border:2px solid var(--light);border-radius:10px;font-size:15px;font-family:inherit;transition:border-color .2s}.form-group input:focus{outline:none;border-color:var(--dark)}
+.question{margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--lighter)}.question:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.q-number{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--black);color:white;border-radius:50%;font-size:13px;font-weight:700;margin-right:10px;flex-shrink:0}
+.q-text{font-size:15px;font-weight:600;color:var(--dark);margin-bottom:14px;display:flex;align-items:flex-start}.q-text span{line-height:28px}
+.q-hint{font-size:13px;color:var(--gray);margin-bottom:12px;padding-left:38px}
+.options{display:flex;flex-direction:column;gap:8px;padding-left:38px}
+.option-label{display:flex;align-items:center;padding:12px 16px;border:2px solid var(--light);border-radius:10px;cursor:pointer;transition:all .2s;font-size:15px}
+.option-label:hover{border-color:var(--dark);background:var(--lighter)}.option-label input[type="radio"]{display:none}
+.option-label .radio-dot{width:20px;height:20px;border:2px solid #CCC;border-radius:50%;margin-right:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.option-label input[type="radio"]:checked+.radio-dot{border-color:var(--black);background:var(--black)}
+.option-label input[type="radio"]:checked+.radio-dot::after{content:'';width:8px;height:8px;background:white;border-radius:50%}
+.option-label input[type="radio"]:checked~.option-text{color:var(--black);font-weight:600}
+.match-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:10px 16px;align-items:center;padding-left:38px}
+.match-kr{background:var(--lighter);padding:10px 16px;border-radius:8px;font-size:16px;font-weight:600;text-align:center;border:1px solid var(--light)}
+.match-arrow{color:var(--gray);font-size:18px}
+.match-select{padding:10px 12px;border:2px solid var(--light);border-radius:8px;font-size:14px;font-family:inherit;background:white;cursor:pointer}.match-select:focus{outline:none;border-color:var(--dark)}
+.writing-input{width:100%;padding:14px 16px;border:2px solid var(--light);border-radius:10px;font-size:16px;font-family:inherit;margin-left:38px;width:calc(100% - 38px)}.writing-input:focus{outline:none;border-color:var(--dark)}
+textarea.writing-input{min-height:160px;resize:vertical;line-height:1.8}
+.reading-passage{background:var(--lighter);border-radius:12px;padding:20px 24px;margin-bottom:20px;font-size:16px;line-height:2;border-left:4px solid var(--black)}
+.reading-passage .passage-label{font-size:12px;color:var(--dark);font-weight:700;margin-bottom:10px;letter-spacing:1px}
+.btn-row{display:flex;justify-content:space-between;gap:12px;margin-top:24px}
+.btn{padding:14px 28px;border:none;border-radius:12px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;transition:all .2s}
+.btn-primary{background:var(--black);color:white;flex:1}.btn-primary:hover{background:var(--dark);transform:translateY(-1px)}
+.btn-secondary{background:var(--light);color:var(--dark)}.btn-secondary:hover{background:#D8D8D8}.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.result-card{background:var(--white);border-radius:16px;padding:40px 32px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.result-score{font-size:64px;font-weight:700;color:var(--black)}.result-total{font-size:20px;color:var(--gray);margin-bottom:20px}
+.result-level{display:inline-block;background:var(--black);color:white;padding:8px 24px;border-radius:24px;font-size:16px;font-weight:700;margin-bottom:16px}
+.result-breakdown{text-align:left;margin-top:24px;padding-top:24px;border-top:1px solid var(--lighter)}
+.result-row{display:flex;justify-content:space-between;padding:10px 0;font-size:15px}.result-row .label{color:var(--dark)}.result-row .score{font-weight:700;color:var(--black)}
+.submit-status{margin-top:16px;padding:12px;border-radius:8px;font-size:14px;text-align:center}.submit-status.success,.submit-status.error{background:var(--lighter);color:var(--dark)}
+.thank-you{margin-top:24px;font-size:14px;color:var(--gray);line-height:1.8}
+.inline-input{width:120px;padding:4px 8px;border:2px solid var(--light);border-radius:6px;font-size:15px;font-family:inherit}.inline-input:focus{outline:none;border-color:var(--dark)}
+@media(max-width:480px){.container{padding:12px 12px 32px}.header{padding:28px 20px}.header h1{font-size:22px}.section-card{padding:20px 16px}.match-grid{grid-template-columns:1fr;gap:8px}.match-arrow{display:none}}
+</style>
+</head>
+<body>
+<div class="container">
+  <a href="index.html" class="back-link">&larr; Back to Level Selection</a>
+  <div class="header">
+    <div class="brand">KOREAN LANGUAGE</div>
+    <h1>Level Test</h1>
+    <div class="subtitle">한국어 레벨 테스트</div>
+    <div class="level-badge">ADVANCED &middot; C1</div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-label"><span id="progressText">Info</span><span id="progressPercent">0%</span></div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <!-- SECTION 0: Info -->
+  <div class="section active" id="section-0">
+    <div class="section-card">
+      <div class="section-title"><div class="section-icon" style="background:var(--dark);">i</div><h2>Your Information</h2></div>
+      <div class="form-group"><label>Name / 이름</label><input type="text" id="studentName" placeholder="Enter your name"></div>
+      <div class="form-group"><label>Email / 이메일</label><input type="email" id="studentEmail" placeholder="Enter your email"></div>
+      <div class="form-group"><label>Country / 나라</label><input type="text" id="studentCountry" placeholder="Where are you from?"></div>
+      <div class="btn-row"><button class="btn btn-primary" onclick="nextSection()">Start Test</button></div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: Vocabulary -->
+  <div class="section" id="section-1">
+    <div class="section-card">
+      <div class="section-title"><div class="section-icon" style="background:var(--black);">A</div><div><h2>Vocabulary <span class="count">어휘</span></h2></div></div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">1</span><span>What does "함축적" mean?</span></div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q1" value="a"><span class="radio-dot"></span><span class="option-text">Explicit</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="b"><span class="radio-dot"></span><span class="option-text">Implicit / Connotative</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="c"><span class="radio-dot"></span><span class="option-text">Literal</span></label>
+          <label class="option-label"><input type="radio" name="q1" value="d"><span class="radio-dot"></span><span class="option-text">Figurative</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">2</span><span>What does "근거" mean?</span></div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q2" value="a"><span class="radio-dot"></span><span class="option-text">Evidence / Basis</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="b"><span class="radio-dot"></span><span class="option-text">Cause</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="c"><span class="radio-dot"></span><span class="option-text">Result</span></label>
+          <label class="option-label"><input type="radio" name="q2" value="d"><span class="radio-dot"></span><span class="option-text">Assumption</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">3</span><span>What does "모순" mean?</span></div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q3" value="a"><span class="radio-dot"></span><span class="option-text">Agreement</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="b"><span class="radio-dot"></span><span class="option-text">Contradiction</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="c"><span class="radio-dot"></span><span class="option-text">Irony</span></label>
+          <label class="option-label"><input type="radio" name="q3" value="d"><span class="radio-dot"></span><span class="option-text">Analogy</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">4</span><span>What does "도모하다" mean?</span></div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q4" value="a"><span class="radio-dot"></span><span class="option-text">To plan / To seek</span></label>
+          <label class="option-label"><input type="radio" name="q4" value="b"><span class="radio-dot"></span><span class="option-text">To abandon</span></label>
+          <label class="option-label"><input type="radio" name="q4" value="c"><span class="radio-dot"></span><span class="option-text">To criticize</span></label>
+          <label class="option-label"><input type="radio" name="q4" value="d"><span class="radio-dot"></span><span class="option-text">To discover</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">5</span><span>Match the Korean words with their English meanings.</span></div>
+        <div class="match-grid">
+          <div class="match-kr">이해관계</div><div class="match-arrow">=</div>
+          <select class="match-select" name="q5"><option value="">Select...</option><option value="interests">Interests (stakes)</option><option value="preconception">Preconception</option><option value="objective">Objective</option></select>
+          <div class="match-kr">선입견</div><div class="match-arrow">=</div>
+          <select class="match-select" name="q6"><option value="">Select...</option><option value="interests">Interests (stakes)</option><option value="preconception">Preconception</option><option value="objective">Objective</option></select>
+          <div class="match-kr">객관적</div><div class="match-arrow">=</div>
+          <select class="match-select" name="q7"><option value="">Select...</option><option value="interests">Interests (stakes)</option><option value="preconception">Preconception</option><option value="objective">Objective</option></select>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">8</span><span>이 사실___ 근거하여 판단해야 한다. (We must judge based on this fact.)</span></div>
+        <div class="q-hint">Choose the correct particle.</div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q8" value="a"><span class="radio-dot"></span><span class="option-text">에</span></label>
+          <label class="option-label"><input type="radio" name="q8" value="b"><span class="radio-dot"></span><span class="option-text">을</span></label>
+          <label class="option-label"><input type="radio" name="q8" value="c"><span class="radio-dot"></span><span class="option-text">로</span></label>
+          <label class="option-label"><input type="radio" name="q8" value="d"><span class="radio-dot"></span><span class="option-text">의</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">9</span><span>발전을 위해서___ 노력이 필요하다. (For development, effort is necessary.)</span></div>
+        <div class="q-hint">Choose the correct particle.</div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q9" value="a"><span class="radio-dot"></span><span class="option-text">는</span></label>
+          <label class="option-label"><input type="radio" name="q9" value="b"><span class="radio-dot"></span><span class="option-text">을</span></label>
+          <label class="option-label"><input type="radio" name="q9" value="c"><span class="radio-dot"></span><span class="option-text">에</span></label>
+          <label class="option-label"><input type="radio" name="q9" value="d"><span class="radio-dot"></span><span class="option-text">도</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">10</span><span>Which sentence means "Not only did we fail, but we also lost the opportunity"?</span></div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q10" value="a"><span class="radio-dot"></span><span class="option-text">실패했을 뿐만 아니라 기회마저 잃었다.</span></label>
+          <label class="option-label"><input type="radio" name="q10" value="b"><span class="radio-dot"></span><span class="option-text">실패해서 기회를 잃었다.</span></label>
+          <label class="option-label"><input type="radio" name="q10" value="c"><span class="radio-dot"></span><span class="option-text">실패하면 기회를 잃는다.</span></label>
+          <label class="option-label"><input type="radio" name="q10" value="d"><span class="radio-dot"></span><span class="option-text">실패했지만 기회가 있다.</span></label>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="prevSection()">Back</button>
+        <button class="btn btn-primary" onclick="nextSection()">Next: Reading</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: Reading -->
+  <div class="section" id="section-2">
+    <div class="section-card">
+      <div class="section-title"><div class="section-icon" style="background:var(--dark);">R</div><div><h2>Reading <span class="count">읽기</span></h2></div></div>
+
+      <div class="reading-passage">
+        <div class="passage-label">EDITORIAL: AI AND THE LABOR MARKET</div>
+        인공지능(AI) 기술의 급속한 발전은 노동 시장에 구조적인 변화를 가져오고 있다. 단순 반복 업무를 수행하는 직종은 자동화로 대체될 가능성이 높으며, 이에 따라 새로운 형태의 일자리가 등장할 것으로 예측된다.<br><br>
+        그러나 비판적 사고력, 창의성, 그리고 대인 관계 능력과 같은 인간 고유의 역량은 AI가 대체하기 어렵다는 것이 전문가들의 공통된 견해이다.<br><br>
+        따라서 교육 시스템은 단순한 지식 전달에서 벗어나 비판적 사고와 문제 해결 능력을 키우는 방향으로 전환되어야 한다.
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">11</span><span>What does AI bring to the labor market according to the passage?</span></div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q11" value="a"><span class="radio-dot"></span><span class="option-text">More jobs for everyone</span></label>
+          <label class="option-label"><input type="radio" name="q11" value="b"><span class="radio-dot"></span><span class="option-text">Structural changes</span></label>
+          <label class="option-label"><input type="radio" name="q11" value="c"><span class="radio-dot"></span><span class="option-text">Higher salaries</span></label>
+          <label class="option-label"><input type="radio" name="q11" value="d"><span class="radio-dot"></span><span class="option-text">Fewer working hours</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">12</span><span>Which type of jobs is most likely to be replaced by AI?</span></div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q12" value="a"><span class="radio-dot"></span><span class="option-text">Creative jobs</span></label>
+          <label class="option-label"><input type="radio" name="q12" value="b"><span class="radio-dot"></span><span class="option-text">Simple repetitive tasks</span></label>
+          <label class="option-label"><input type="radio" name="q12" value="c"><span class="radio-dot"></span><span class="option-text">Interpersonal jobs</span></label>
+          <label class="option-label"><input type="radio" name="q12" value="d"><span class="radio-dot"></span><span class="option-text">Management roles</span></label>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">13</span><span>What should education focus on, according to the passage?</span></div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q13" value="a"><span class="radio-dot"></span><span class="option-text">AI programming skills</span></label>
+          <label class="option-label"><input type="radio" name="q13" value="b"><span class="radio-dot"></span><span class="option-text">Memorizing information</span></label>
+          <label class="option-label"><input type="radio" name="q13" value="c"><span class="radio-dot"></span><span class="option-text">Critical thinking and problem-solving</span></label>
+          <label class="option-label"><input type="radio" name="q13" value="d"><span class="radio-dot"></span><span class="option-text">Foreign language learning</span></label>
+        </div>
+      </div>
+
+      <div class="reading-passage" style="margin-top:28px;">
+        <div class="passage-label">RESEARCH ABSTRACT: BILINGUALISM</div>
+        본 연구는 이중 언어 사용자의 인지적 유연성에 대해 분석하였다. 실험 참가자 200명을 대상으로 과제 전환(task-switching) 능력을 측정한 결과, 이중 언어 사용자 집단이 단일 언어 사용자 집단보다 과제 전환 속도에서 유의미한 차이를 보였다(p&lt;0.05).<br><br>
+        이 결과는 이중 언어 사용이 실행 기능(executive function)의 발달에 긍정적인 영향을 미칠 수 있음을 시사한다.
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">14</span><span>What did the research measure?</span></div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q14" value="a"><span class="radio-dot"></span><span class="option-text">Memory capacity</span></label>
+          <label class="option-label"><input type="radio" name="q14" value="b"><span class="radio-dot"></span><span class="option-text">Task-switching ability</span></label>
+          <label class="option-label"><input type="radio" name="q14" value="c"><span class="radio-dot"></span><span class="option-text">Language learning speed</span></label>
+          <label class="option-label"><input type="radio" name="q14" value="d"><span class="radio-dot"></span><span class="option-text">Reading comprehension</span></label>
+        </div>
+      </div>
+
+      <div class="reading-passage" style="margin-top:28px;">
+        <div class="passage-label">FORMAL INVITATION</div>
+        제 7회 한국어 교육 국제 학술 포럼<br><br>
+        일시: 2026년 6월 15일(월) 10:00~17:00<br>
+        장소: 서울대학교 국제회의실<br>
+        주제: "글로벌 시대의 한국어 교육: 도전과 과제"<br><br>
+        한국어 교육에 관심 있는 연구자 및 교육자 여러분의 많은 참여를 부탁드립니다.<br>
+        참가 신청은 홈페이지를 통해 가능합니다.
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">15</span><span>What is the purpose of this text?</span></div>
+        <div class="options">
+          <label class="option-label"><input type="radio" name="q15" value="a"><span class="radio-dot"></span><span class="option-text">To announce exam results</span></label>
+          <label class="option-label"><input type="radio" name="q15" value="b"><span class="radio-dot"></span><span class="option-text">To invite participation in an academic forum</span></label>
+          <label class="option-label"><input type="radio" name="q15" value="c"><span class="radio-dot"></span><span class="option-text">To advertise a Korean language course</span></label>
+          <label class="option-label"><input type="radio" name="q15" value="d"><span class="radio-dot"></span><span class="option-text">To share research findings</span></label>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="prevSection()">Back</button>
+        <button class="btn btn-primary" onclick="nextSection()">Next: Writing</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: Writing -->
+  <div class="section" id="section-3">
+    <div class="section-card">
+      <div class="section-title"><div class="section-icon" style="background:var(--dark);">W</div><div><h2>Writing <span class="count">쓰기</span></h2></div></div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">16</span><span>Convert the following sentences to formal written style (격식체/합쇼체).</span></div>
+        <div style="padding-left:38px;display:flex;flex-direction:column;gap:12px;">
+          <div><div style="font-size:14px;color:var(--gray);margin-bottom:4px;">a) "이 문제는 심각해요." &rarr; 격식체</div><input type="text" class="writing-input" name="q16a" placeholder="이 문제는..." style="margin-left:0;width:100%;"></div>
+          <div><div style="font-size:14px;color:var(--gray);margin-bottom:4px;">b) "우리는 해결책을 찾아야 해요." &rarr; 격식체</div><input type="text" class="writing-input" name="q16b" placeholder="우리는..." style="margin-left:0;width:100%;"></div>
+          <div><div style="font-size:14px;color:var(--gray);margin-bottom:4px;">c) "많은 사람들이 동의했어요." &rarr; 격식체</div><input type="text" class="writing-input" name="q16c" placeholder="많은 사람들이..." style="margin-left:0;width:100%;"></div>
+        </div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">17</span><span>Write a counter-argument (3~4 sentences) to: "AI will make foreign language learning unnecessary."</span></div>
+        <div class="q-hint">Present logical reasons why this claim is problematic. Use formal language.</div>
+        <textarea class="writing-input" name="q17" placeholder="위 주장에 대한 반론을 격식체로 작성하십시오..."></textarea>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-number">18</span><span>Write an essay: "What are the effects of urbanization on society?" (7~8 sentences, 격식체)</span></div>
+        <div class="q-hint">Include: introduction, positive effects, negative effects, and a balanced conclusion. Use academic vocabulary.</div>
+        <textarea class="writing-input" name="q18" placeholder="도시화가 사회에 미치는 영향에 대해 논하시오...&#10;&#10;도시화는 현대 사회의 주요한 현상 중 하나이다..."></textarea>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" onclick="prevSection()">Back</button>
+        <button class="btn btn-primary" onclick="submitTest()">Submit Test</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: Results -->
+  <div class="section" id="section-4">
+    <div class="result-card">
+      <div style="font-size:14px;color:var(--gray);margin-bottom:8px;">YOUR SCORE</div>
+      <div class="result-score" id="resultScore">0</div>
+      <div class="result-total">/ 60</div>
+      <div class="result-level" id="resultLevel">Advanced</div>
+      <p id="resultMessage" style="font-size:15px;color:var(--dark);margin-top:12px;line-height:1.8;"></p>
+      <div class="result-breakdown">
+        <div class="result-row"><span class="label">Vocabulary (어휘)</span><span class="score" id="scoreVocab">0 / 20</span></div>
+        <div class="result-row"><span class="label">Reading (읽기)</span><span class="score" id="scoreReading">0 / 20</span></div>
+        <div class="result-row"><span class="label">Writing (쓰기)</span><span class="score" id="scoreWriting">0 / 20</span></div>
+      </div>
+      <div id="submitStatus"></div>
+      <div class="thank-you">Thank you for completing the level test!<br>Your tutor will review your results and contact you soon.<br><br><a href="index.html" style="color:var(--dark);font-weight:600;">&larr; Back to Level Selection</a></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SECTIONS=5;let currentSection=0;
+const SHEETS_URL='YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+const TEST_LEVEL='Advanced';
+const ANSWERS={q1:'b',q2:'a',q3:'b',q4:'a',q5:'interests',q6:'preconception',q7:'objective',q8:'a',q9:'a',q10:'a',q11:'b',q12:'b',q13:'c',q14:'b',q15:'b'};
+
+function updateProgress(){const p=Math.round((currentSection/(SECTIONS-1))*100);document.getElementById('progressFill').style.width=p+'%';document.getElementById('progressPercent').textContent=p+'%';document.getElementById('progressText').textContent=['Info','Vocabulary','Reading','Writing','Complete'][currentSection];}
+function showSection(i){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById('section-'+i).classList.add('active');currentSection=i;updateProgress();window.scrollTo({top:0,behavior:'smooth'});}
+function nextSection(){if(currentSection===0){if(!document.getElementById('studentName').value.trim()||!document.getElementById('studentEmail').value.trim()){alert('Please enter your name and email.');return;}}if(currentSection<SECTIONS-1)showSection(currentSection+1);}
+function prevSection(){if(currentSection>0)showSection(currentSection-1);}
+function getRadioValue(n){const e=document.querySelector(`input[name="${n}"]:checked`);return e?e.value:'';}
+function getSelectValue(n){const e=document.querySelector(`select[name="${n}"]`);return e?e.value:'';}
+function getInputValue(n){const e=document.querySelector(`input[name="${n}"],textarea[name="${n}"]`);return e?e.value.trim():'';}
+
+function gradeTest(){
+  let v=0,r=0,w=0;
+  for(let i=1;i<=4;i++)if(getRadioValue('q'+i)===ANSWERS['q'+i])v+=2;
+  for(let i=5;i<=7;i++)if(getSelectValue('q'+i)===ANSWERS['q'+i])v+=2;
+  for(let i=8;i<=10;i++)if(getRadioValue('q'+i)===ANSWERS['q'+i])v+=2;
+  for(let i=11;i<=15;i++)if(getRadioValue('q'+i)===ANSWERS['q'+i])r+=4;
+  // Writing Q16: check if answered with formal endings
+  const w16a=getInputValue('q16a'),w16b=getInputValue('q16b'),w16c=getInputValue('q16c');
+  let w16=0;
+  if(w16a.includes('심각합니다'))w16+=2;else if(w16a.length>5)w16+=1;
+  if(w16b.includes('찾아야 합니다'))w16+=2;else if(w16b.length>5)w16+=1;
+  if(w16c.includes('동의했습니다')||w16c.includes('동의하였습니다'))w16+=2;else if(w16c.length>5)w16+=1;
+  w+=Math.min(w16,5);
+  // Writing Q17: counter-argument
+  const w17=getInputValue('q17');
+  if(w17.length>60)w+=5;else if(w17.length>20)w+=3;else if(w17.length>0)w+=1;
+  // Writing Q18: essay
+  const w18=getInputValue('q18');
+  if(w18.length>120)w+=10;else if(w18.length>60)w+=5;else if(w18.length>0)w+=2;
+  return{vocabScore:v,readingScore:r,writingScore:w,total:v+r+w};
+}
+
+function getLevel(t){
+  if(t<=30)return{level:'Advanced',message:'You are at the Advanced level. We will work on academic Korean, formal writing, and nuanced argumentation.'};
+  if(t<=50)return{level:'Advanced+',message:'Excellent Korean skills! We will focus on refining your academic writing, professional Korean, and subtle stylistic choices.'};
+  return{level:'Near-native',message:'Outstanding! Your Korean is at a near-native level. We will work on specialized topics, literary analysis, and professional mastery.'};
+}
+
+function submitTest(){
+  const s=gradeTest();const l=getLevel(s.total);
+  document.getElementById('resultScore').textContent=s.total;
+  document.getElementById('resultLevel').textContent='Recommended: '+l.level;
+  document.getElementById('resultMessage').textContent=l.message;
+  document.getElementById('scoreVocab').textContent=s.vocabScore+' / 20';
+  document.getElementById('scoreReading').textContent=s.readingScore+' / 20';
+  document.getElementById('scoreWriting').textContent=s.writingScore+' / 20';
+  showSection(4);
+  const data={timestamp:new Date().toISOString(),testLevel:TEST_LEVEL,name:document.getElementById('studentName').value.trim(),email:document.getElementById('studentEmail').value.trim(),country:document.getElementById('studentCountry').value.trim(),vocabScore:s.vocabScore,readingScore:s.readingScore,writingScore:s.writingScore,totalScore:s.total,recommendedLevel:l.level,q1:getRadioValue('q1'),q2:getRadioValue('q2'),q3:getRadioValue('q3'),q4:getRadioValue('q4'),q5:getSelectValue('q5'),q6:getSelectValue('q6'),q7:getSelectValue('q7'),q8:getRadioValue('q8'),q9:getRadioValue('q9'),q10:getRadioValue('q10'),q11:getRadioValue('q11'),q12:getRadioValue('q12'),q13:getRadioValue('q13'),q14:getRadioValue('q14'),q15:getRadioValue('q15'),q16a:getInputValue('q16a'),q16b:getInputValue('q16b'),q16c:getInputValue('q16c'),q17:getInputValue('q17'),q18:getInputValue('q18')};
+  if(SHEETS_URL!=='YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'){fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(()=>{const e=document.getElementById('submitStatus');e.className='submit-status success';e.textContent='Your answers have been saved successfully!';}).catch(()=>{const e=document.getElementById('submitStatus');e.className='submit-status error';e.textContent='Could not save to server. Please screenshot your results.';});}
+}
+updateProgress();
+</script>
+</body>
+</html>
